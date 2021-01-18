@@ -1,9 +1,10 @@
 # Web Server Example
 
-This folder contains an example [Terraform](https://www.terraform.io/) configuration that deploys a single web server (using 
-[EC2](https://aws.amazon.com/ec2/)) in an [Amazon Web Services (AWS) account](http://aws.amazon.com/). The web server
-listens on port 8080 (which is defined as a variable in this example) and returns the text "Hello, World" for the `/` 
-URL.
+This folder contains an example [Terraform](https://www.terraform.io/) configuration that deploys a cluster of web servers 
+(using [EC2](https://aws.amazon.com/ec2/) and [Auto Scaling](https://aws.amazon.com/autoscaling/)) and a load balancer
+(using [ELB](https://aws.amazon.com/elasticloadbalancing/)) in an [Amazon Web Services (AWS) 
+account](http://aws.amazon.com/). The load balancer listens on port 80 and returns the text "Hello, World" for the 
+`/` URL.
 
 For more info, please see Chapter 2, "Getting started with Terraform", of 
 *[Terraform: Up and Running](http://www.terraformupandrunning.com)*.
@@ -37,10 +38,10 @@ terraform init
 terraform apply
 ```
 
-When the `apply` command completes, it will output the public IP address of the server. To test that IP:
+When the `apply` command completes, it will output the DNS name of the load balancer. To test the load balancer:
 
 ```
-curl http://(server_public_ip):8080/
+curl http://<alb_dns_name>/
 ```
 
 Clean up when you're done:
